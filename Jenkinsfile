@@ -19,14 +19,17 @@ pipeline {
         }
 
         stage('Push Docker') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                                   bat """
-                                   echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-                                   docker push %IMAGE_NAME%:latest
-                                   docker logout
-                                   """
-            }
+    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', 
+                                      usernameVariable: 'DOCKER_USER', 
+                                      passwordVariable: 'DOCKER_PASS')]) {
+        bat """
+        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+        docker push houssem128/myapp:1.0
+        docker logout
+        """
+    }
+}
+
          }
         }
 
