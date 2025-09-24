@@ -16,11 +16,7 @@ pipeline {
             steps {
                 bat "docker build -t %DOCKER_IMAGE% ."
             }
-        }
-        stage('Deploy Kubernetes') {
-            steps {
-                bat 'kubectl apply -f k8s-deployment.yaml'
-            }
-        }
+        
+    }
     }
 }
