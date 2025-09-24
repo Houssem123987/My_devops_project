@@ -27,6 +27,7 @@ pipeline {
                                    docker logout
                                    """
             }
+         }
         }
 
         stage('Deploy Kubernetes') {
