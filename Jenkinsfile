@@ -29,10 +29,6 @@ pipeline {
         """
     }
 }
-
-         }
-        }
-
         stage('Deploy Kubernetes') {
             steps {
                 bat 'kubectl apply -f k8s-deployment.yaml'
