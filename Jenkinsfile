@@ -17,15 +17,6 @@ pipeline {
                 bat "docker build -t %DOCKER_IMAGE% ."
             }
         }
-
-      stage('Push Docker') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-                    bat 'docker push houssem128/myapp:1.0'
-                }
-            }
-        }
         stage('Deploy Kubernetes') {
             steps {
                 bat 'kubectl apply -f k8s-deployment.yaml'
